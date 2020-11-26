@@ -15,7 +15,8 @@ This script configures a freshly created Raspberry Pi bootable SD card to appear
 
 `NetworkName` and `NetworkPassword` are _optional_ parameters. Both are _required_ if either are specified.
 
-# Verify it works on Windows 10
+# Configuring the Pi as a USB ethernet device
+## Steps
 1. Run the script
 1. Eject the card and insert into Raspberry Pi Zero
 1. Plug the _USB_ port into your computer.
@@ -32,22 +33,23 @@ This script configures a freshly created Raspberry Pi bootable SD card to appear
     Reply from fe80::d31c:3ca4:a4b6:895f%61: time<1ms
     ```
     
-# Connecting over USB-Ethernet
+## Verify over the USB connection
 1. SSH to the device it is known as `raspberrypi.local` The default username is `pi` and the default password is `raspberry'
     * Using the linux WSL command prompt `ssh pi@raspberrypi.local`
     * Using Putty... _to be added_
 
-# Verifying wifi (optional)
+## Verifying wifi (optional)
 1. SSH into the device
 1. run `ifconfig wlan0` and verify the IP address is from your network.  
     * A `169.x.y.z` address means it did not work.
 
-# Enabling Powershell scripts
+# Troubleshooting
+## Enabling Powershell scripts
 
 You may have enable powershell scripts from an _elevated_ prompt
   `set-executionpolicy remotesigned`
 
-# Enabling Debug Output
+## Enabling Debug Output
 
 * Enable debug out put with
   *   `$DebugPreference = "Continue"`
