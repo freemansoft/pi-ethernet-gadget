@@ -6,11 +6,16 @@ I build this using PowerShell because my base laptop is a windows machine.
 
 ![Topology with PC and Pi-Zero-W](./Pi-Network-Gadget.png)
 
+## Video Walkthrough
+
+[![Video Walkthrough](https://i9.ytimg.com/vi/Ci_mZJoS3tg/mq3.jpg?sqp=CIyYgf4F&rs=AOn4CLC1JsYWLTaAGd9ybdNrNLXm6SQfJw)](https://youtu.be/Ci_mZJoS3tg "Youtube")
+
 # Configure a Raspberry PI O/S SDCard using Enable-Ethernet-Gadget.ps
 1. Configures the Pi's USB as OTG
 1. Makes the Pi appear a USB based network adapter with the Pi as the other device on the network. This is sometimes referred to as a _Network Gadget_ mode.
 1. Enables SSH so you can ssh in over the USB connection or over wifi
 1. _Optionally_ configures the wi-fi for a specific network
+1. Copies some useful configuration scripts to the boot partition
 
 ## Usage
 `Enable-Ethernet-Gadget -PIBootDrive F: -NetworkName my-ssid -NetworkPassword my-network-password`
@@ -23,6 +28,7 @@ I build this using PowerShell because my base laptop is a windows machine.
 # Configuring the Pi as a USB ethernet device
 ## Steps
 1. Create a new micro SD card using the _Raspberry Pi Imager_
+    1. You may have to eject the card and re-insert it to mount the boot partition
 1. Run the script `Enable-Ethernet-Gadget.ps` as described in _Usage_
 1. Eject the card and insert into Raspberry Pi Zero
 1. Plug the _USB_ port into your computer.
@@ -70,3 +76,33 @@ You may have enable powershell scripts from an _elevated_ prompt
 
 # Known Issues
 1. Hard coded country code is 'US'
+
+# All Gadget Modules
+As of 11/2020
+
+| | |
+|-|-|
+| Serial |  g_serial |
+| Ethernet |  g_ether |
+| Mass storage |  g_mass_storage |
+| MIDI |  g_midi |
+| Audio |  g_audio |
+| Keyboard/Mouse |  g_hid |
+| Mass storage and Serial |  g_acm_ms |
+| Ethernet and Serial |  g_cdc |
+| Multi |  g_multi - Allows you to configure 2 from Ethernet, Mass storage and Serial |
+| Webcam |  g_webcam |
+| Printer |  g_printer |
+| Gadget tester |  g_zero |
+
+# Additional scripts copied to boot partition
+A set of **optional** utility scripts will be copied to the boot partition.
+
+All of these must be run with _sudo_ 
+| | script | purpose |
+| - | - | - |
+| | aircrack-install.sh | Converts this pi to an aircrack machine with monitor mode |
+| Recommended | firewall.sh | Enables the firewall blocking all inbound traffic on wlan0 while leaving usb0 open |
+| Recommended | hostname-custom-serial.sh | Sets the hostname of the pi to pi-<serial_id>.  Updates /etc/hostname and /etc/hosts |
+
+

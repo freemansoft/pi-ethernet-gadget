@@ -103,3 +103,10 @@ network={
 } else {
     echo "Network not enabled: NetworkName or NetworkPassword not provided"
 }
+
+###################################################
+# 
+echo "Copying aircrack-install.sh to boot volume in case you want to install and use it"
+echo "Copying firewall.sh to boot volume in case you want to allow SSH only on USB0"
+echo "Copying hostname-custom-serial.sh to boot volume in case you want to set hostname to pi-<serial>.local"
+Copy-Item -Path "*.sh" -Destination "$PiBootDrive"
